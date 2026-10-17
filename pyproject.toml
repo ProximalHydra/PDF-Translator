@@ -1,0 +1,31 @@
+[project]
+name = "forma-pdf-translator"
+version = "0.2.0"
+description = "Yerleşimi koruyan, kontrollü Türkçe PDF çeviri uygulaması"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi==0.135.1",
+  "uvicorn[standard]==0.41.0",
+  "python-multipart==0.0.22",
+  "pymupdf==1.27.2",
+  "pymupdf-fonts==1.0.5",
+  "openai==2.28.0",
+]
+
+[project.optional-dependencies]
+local = ["torch==2.8.0", "transformers==4.57.1", "peft==0.17.1", "sacrebleu==2.5.1"]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[dependency-groups]
+dev = ["pytest==9.0.2", "httpx==0.28.1", "playwright==1.62.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
